@@ -1,3 +1,5 @@
+import os
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -38,6 +40,14 @@ config.set_main_option(
     "sqlalchemy.url",
     settings.postgresql_connection_string.replace("%", "%%"),
 )
+
+database_url = os.getenv("DATABASE_URL") # For test database
+
+if database_url:
+    config.set_main_option(
+        "sqlalchemy.url",
+        database_url.replace("%", "%%"),
+    )
 target_metadata = SQLModel.metadata
 
 
