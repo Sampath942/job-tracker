@@ -16,13 +16,7 @@ from internal.repository.interview_question_answer_repository import create_inte
 from internal.repository.interview_feedback_repository import create_interview_feedback
 
 def to_lowercase(data: str) -> str:
-    final_str: str = ""
-    for ch in data:
-        if ch > 'A' and ch < 'Z':
-            ch = chr(ord(ch) + 32)
-        final_str += ch
-
-    return final_str
+    return data.strip().lower()
 
 def add_interview_details_service(interview_data: InterviewCreate, session: 
                                   Session) -> InterviewRead:
